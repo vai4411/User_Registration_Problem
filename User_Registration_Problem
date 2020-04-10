@@ -1,2 +1,18 @@
 #!/bin/bash -x
 echo "Welcome User..."
+
+#variables
+first_name=""
+pattern=""
+
+function validateName() {
+	pattern=^[A-Z]{1}[a-zA-Z]{2,}
+	read -p "Enter First Name:" first_name
+	if [[ $first_name =~ $pattern ]]
+	then
+		echo "Name is Valid..."
+	else
+		echo "Name is Invalid..."
+	fi
+}
+validateName
