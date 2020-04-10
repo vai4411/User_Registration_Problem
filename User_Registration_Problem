@@ -24,7 +24,7 @@ function validateName() {
 }
 
 function validateEmail() {
-	pattern="^[0-9a-z]+[@][a-z]+[.]{1}[a-z]{2,}$"
+	pattern="^[0-9a-z]+[+_.-]?[0-9a-z]+[@][a-z]+[.]{1}[a-z]{2,}[.]?[a-z]+$"
 	read -p "Enter Email Address:" email
 	if [[ $email =~ $pattern ]]
 	then
