@@ -4,6 +4,7 @@ echo "Welcome User..."
 #variables
 first_name=""
 last_name=""
+email=""
 pattern=""
 
 function validateName() {
@@ -17,4 +18,16 @@ function validateName() {
 		echo "Name is Invalid..."
 	fi
 }
+
+function validateEmail() {
+	pattern=^[0-9a-z]+[@][a-z]+[.]{1}[a-z]{2,}$
+	read -p "Enter Email Address:" email
+	if [[ $email =~ $pattern ]]
+	then
+		echo "Email Address is Valid..."
+	else
+		echo "Email Address is Invalid..."
+	fi
+} 
 validateName
+validateEmail
