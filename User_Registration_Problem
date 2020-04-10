@@ -8,6 +8,8 @@ email=""
 mobile_number=""
 password=""
 pattern=""
+special_character=0
+character=""
 
 function validateName() {
 	pattern="^[A-Z]{1}[a-zA-Z]{2,}$"
@@ -43,10 +45,28 @@ function validateMobileNumber() {
 	fi
 }
 
+function specialCharacter() {
+	for (( word=0 ; word<${#password} ; word++ ))
+   do
+      character=${password:$word:1}
+      if [[ ! $character == *[[:alnum:]]* ]]
+      then
+         special_character=$(($special_character + 1))
+      fi
+   done
+}
+
 function validatePassword() {
-	pattern="^[0-9A-Za-z]{8,}$"
+	pattern="^[0-9A-Za-z]{8,}"
 	read -p "Enter Password:" password
-	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]] && [[ $password == *[[:digit:]]* ]]
+	specialCharacter
+	if [ $special_character -eq 1 ]
+	then
+		echo "Exact 1 special character present..."
+	else
+		echo "More than 1 special character present..."
+	fi
+	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]] && [[ $password == *[[:digit:]]* ]] && [ $special_character -eq 1 ]
 	then
 		echo "Password is valid..."
 	else
