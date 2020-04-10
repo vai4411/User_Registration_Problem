@@ -46,7 +46,7 @@ function validateMobileNumber() {
 function validatePassword() {
 	pattern="^[A-Za-z]{8,}$"
 	read -p "Enter Password:" password
-	if [[ $password =~ $pattern ]]
+	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]]
 	then
 		echo "Password is valid..."
 	else
