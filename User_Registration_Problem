@@ -6,6 +6,7 @@ first_name=""
 last_name=""
 email=""
 mobile_number=""
+password=""
 pattern=""
 
 function validateName() {
@@ -42,6 +43,18 @@ function validateMobileNumber() {
 	fi
 }
 
+function validatePassword() {
+	pattern="^[A-Za-z]{8,}$"
+	read -p "Enter Password:" password
+	if [[ $password =~ $pattern ]]
+	then
+		echo "Password is valid..."
+	else
+		echo "Password is Invalid..."
+	fi
+}
+
 validateName
 validateEmail
 validateMobileNumber
+validatePassword
