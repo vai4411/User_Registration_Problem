@@ -2,20 +2,20 @@
 echo "Welcome User..."
 
 #variables
-first_name=""
-last_name=""
+firstName=""
+lastName=""
 email=""
-mobile_number=""
+mobileNumber=""
 password=""
 pattern=""
-special_character=0
+specialCharacter=0
 character=""
 
 function validateName() {
 	pattern="^[A-Z]{1}[a-zA-Z]{2,}$"
-	read -p "Enter First Name:" first_name
-	read -p "Enter Last Name:" last_name
-	if [[ $first_name =~ $pattern ]] && [[ $last_name =~ $pattern ]]
+	read -p "Enter First Name:" firstName
+	read -p "Enter Last Name:" lastName
+	if [[ $firstName =~ $pattern ]] && [[ $lastName =~ $pattern ]]
 	then
 		echo "Name is Valid..."
 	else
@@ -36,8 +36,8 @@ function validateEmail() {
 
 function validateMobileNumber() {
 	pattern="^[0-9]{2}[ ][0-9]{10}$"
-	read -p "Enter Mobile Number:" mobile_number
-	if [[ $mobile_number =~ $pattern ]]
+	read -p "Enter Mobile Number:" mobileNumber
+	if [[ $mobileNumber =~ $pattern ]]
 	then
 		echo "Mobile Number is valid..."
 	else
@@ -45,13 +45,13 @@ function validateMobileNumber() {
 	fi
 }
 
-function specialCharacter() {
+function specialCase() {
 	for (( word=0 ; word<${#password} ; word++ ))
    do
       character=${password:$word:1}
       if [[ ! $character == *[[:alnum:]]* ]]
       then
-         special_character=$(($special_character + 1))
+         specialCharacter=$(($specialCharacter + 1))
       fi
    done
 }
@@ -59,14 +59,14 @@ function specialCharacter() {
 function validatePassword() {
 	pattern="^[0-9A-Za-z]{8,}"
 	read -p "Enter Password:" password
-	specialCharacter
-	if [ $special_character -eq 1 ]
+	specialCase
+	if [ $specialCharacter -eq 1 ]
 	then
 		echo "Exact 1 special character present..."
 	else
 		echo "More than 1 special character present..."
 	fi
-	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]] && [[ $password == *[[:digit:]]* ]] && [ $special_character -eq 1 ]
+	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]] && [[ $password == *[[:digit:]]* ]] && [ $specialCharacter -eq 1 ]
 	then
 		echo "Password is valid..."
 	else
