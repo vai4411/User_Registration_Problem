@@ -47,6 +47,7 @@ function validateMobileNumber() {
 
 function specialCase() {
 	for (( word=0 ; word<${#password} ; word++ ))
+<<<<<<< HEAD
    do
       character=${password:$word:1}
       if [[ ! $character == *[[:alnum:]]* ]]
@@ -54,6 +55,15 @@ function specialCase() {
          specialCharacter=$(($specialCharacter + 1))
       fi
    done
+=======
+	do
+		character=${password:$word:1}
+		if [[ ! $character == *[[:alnum:]]* ]]
+		then
+			special_character=$(($special_character + 1))
+		fi
+	done
+>>>>>>> UC9-EmailPatternPassAllSamples
 }
 
 function validatePassword() {
