@@ -45,4 +45,5 @@ function main() {
 	fi
 }
 
+#Calling main function
 main
