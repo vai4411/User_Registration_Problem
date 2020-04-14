@@ -1,80 +1,49 @@
 #!/bin/bash -x
 echo "Welcome User..."
 
-#variables
-first_name=""
-last_name=""
+#variable
+firstName=""
+lastName=""
 email=""
-mobile_number=""
+mobileNumber=""
 password=""
 pattern=""
-special_character=0
-character=""
 
-function validateName() {
+function main() {
 	pattern="^[A-Z]{1}[a-zA-Z]{2,}$"
-	read -p "Enter First Name:" first_name
-	read -p "Enter Last Name:" last_name
-	if [[ $first_name =~ $pattern ]] && [[ $last_name =~ $pattern ]]
+	read -p "Enter First Name:" firstName
+	read -p "Enter Last Name:" lastName
+	if [[ $firstName =~ $pattern ]] && [[ $lastName =~ $pattern ]]
 	then
 		echo "Name is Valid..."
 	else
 		echo "Name is Invalid..."
 	fi
-}
-
-function validateEmail() {
-	pattern="^[0-9a-z]+[@][a-z]+[.]{1}[a-z]{2,}$"
+	pattern="^[0-9a-z]+[+_.-]?[0-9a-z]+[@][a-z]+[.]{1}[a-z]{2,}[.]?[a-z]+$"
 	read -p "Enter Email Address:" email
 	if [[ $email =~ $pattern ]]
 	then
-		echo "Email Address is Valid..."
+		echo "Email is Valid..."
 	else
-		echo "Email Address is Invalid..."
+		echo "Email is Invalid..."
 	fi
-} 
-
-function validateMobileNumber() {
-	pattern="^[0-9]{2}[ ][0-9]{10}$"
-	read -p "Enter Mobile Number:" mobile_number
-	if [[ $mobile_number =~ $pattern ]]
+	pattern="^[0-9]{2}[ ]{1}[0-9]{10}$"
+	read -p "Enter Mobile Number:" mobileNumber
+	if [[ $mobileNumber =~ $pattern ]]
 	then
-		echo "Mobile Number is valid..."
+		echo "Mobile Number is Valid..."
 	else
 		echo "Mobile Number is Invalid..."
 	fi
-}
-
-function specialCharacter() {
-	for (( word=0 ; word<${#password} ; word++ ))
-   do
-      character=${password:$word:1}
-      if [[ ! $character == *[[:alnum:]]* ]]
-      then
-         special_character=$(($special_character + 1))
-      fi
-   done
-}
-
-function validatePassword() {
-	pattern="^[0-9A-Za-z]{8,}"
-	read -p "Enter Password:" password
-	specialCharacter
-	if [ $special_character -eq 1 ]
+	pattern="(?=.*[A-Z].*)(?=.*[0-9].*)([a-zA-Z0-9]{4,}[!@#$%^&*()_+][a-zA-Z0-9]{3,})"
+	read -p "Enter the Password:" password
+	if [[ $password =~ $pattern ]]
 	then
-		echo "Exact 1 special character present..."
-	else
-		echo "More than 1 special character present..."
-	fi
-	if [[ $password =~ $pattern ]] && [[ $password == *[[:upper:]]* ]] && [[ $password == *[[:digit:]]* ]] && [ $special_character -eq 1 ]
-	then
-		echo "Password is valid..."
+		echo "Password is Valid..."
 	else
 		echo "Password is Invalid..."
 	fi
 }
 
-validateName
-validateEmail
-validateMobileNumber
-validatePassword
+#Calling main function
+main
